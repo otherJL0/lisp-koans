@@ -13,7 +13,7 @@
 ;;; limitations under the License.
 
 (define-test shadowing
-  (assert-equal ____ (let ((z 4)) (list z (let ((z 2)) z)))))
+  (assert-equal '(4 2) (let ((z 4)) (list z (let ((z 2)) z)))))
 
 (defun block-1 ()
   (block here
@@ -28,8 +28,8 @@
     (return-from outer 'valve)))
 
 (define-test block-return-from
-  (assert-equal ____ (block-1))
-  (assert-equal ____ (block-2)))
+  (assert-equal 4 (block-1))
+  (assert-equal 'space (block-2)))
 
 ;;; See http://www.gigamonkeys.com/book/variables.html
 
